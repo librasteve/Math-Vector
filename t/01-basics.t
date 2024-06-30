@@ -26,18 +26,18 @@ isa-ok($v7, Math::Vector, "Variable is of type Math::Vector");
 isa-ok($vcrazy, Math::Vector, "Variable is of type Math::Vector");
 does-ok($v1, Positional, "Vector is Positional");
 
-is(~$v1, "(1, 2, 3)", "Stringify works");
-is(~$v3, "(-1, 0, 2)", "Stringify works");
-is(~$origin3d, "(0, 0, 0)", "Stringify works");
-is(~$v5, "(1, 2, 3, 4, 5)", "Stringify works");
-is(~$vcrazy, "((1, 2, 3), (-1, 0, -1))", "Stringify works");
+is(~$v1, "^(1, 2, 3)", "Stringify works");
+is(~$v3, "^(-1, 0, 2)", "Stringify works");
+is(~$origin3d, "^(0, 0, 0)", "Stringify works");
+is(~$v5, "^(1, 2, 3, 4, 5)", "Stringify works");
+is(~$vcrazy, "^(^(1, 2, 3), ^(-1, 0, -1))", "Stringify works");
 
 is($v1[0], 1, "[] works on Vector");
 is($v1[1..2], (2, 3), "[] works on Vector");
 
-is(~EVAL($v1.perl), ~$v1, ".perl works");
-is(~EVAL($v9.perl), ~$v9, ".perl works");
-is(~EVAL($vcrazy.perl), ~$vcrazy, ".perl works");
+is(~EVAL($v1.raku), ~$v1, ".raku works");
+is(~EVAL($v9.raku), ~$v9, ".raku works");
+is(~EVAL($vcrazy.raku), ~$vcrazy, ".raku works");
 
 is $v11.conj, Math::Vector.new(0-i,1-i), ".conj works";
 
@@ -48,8 +48,8 @@ is($v7.dim, 7, "dim works for 7D Math::Vector");
 is-approx($v7 ⋅ $v8, 0, "Perpendicular Math::Vectors have 0 dot product");
 
 #basic math tests
-is(~($v1 + $v2), "(4, 6, 3)", "Basic sum works");
-is(~($v7 + $v9), "(2, 2, 3, 4, 5, 6, 7)", "Basic sum works, 7D");
+is(~($v1 + $v2), "^(4, 6, 3)", "Basic sum works");
+is(~($v7 + $v9), "^(2, 2, 3, 4, 5, 6, 7)", "Basic sum works, 7D");
 is($v1 + $v2, $v2 + $v1, "Addition is commutative");
 is(($v1 + $v2) + $v3, $v1 + ($v2 + $v3), "Addition is associative");
 is($v1 + $origin3d, $v1, "Addition with origin leaves original");
@@ -61,11 +61,11 @@ is($v1 + $origin3d, $v1, "Addition with origin leaves original");
 # }
 # is(~($v1 + $v2), "(4, 6, 3)", "Basic sum works");
 
-is(~($v1 - $v2), "(-2, -2, 3)", "Basic subtraction works");
+is(~($v1 - $v2), "^(-2, -2, 3)", "Basic subtraction works");
 is($v1 - $v2, -($v2 - $v1), "Subtraction is anticommutative");
 is($v1 - $origin3d, $v1, "Subtracting the origin leaves original");
 is(-$origin3d, $origin3d, "Negating the origin leaves the origin");
-is(~(-$v2), "(-3, -4, 0)", "Negating works");
+is(~(-$v2), "^(-3, -4, 0)", "Negating works");
 # {
 #     my Math::Vector $a = $v1;
 #     $a -= $v2;
@@ -130,7 +130,7 @@ dies-ok( { $v7 dot $v5 }, "You can't do dot products of different dimensions");
 }
 
 #cross product tests
-is(~($v1 × $v2), "(-12, 9, -2)", "Basic cross product works");
+is(~($v1 × $v2), "^(-12, 9, -2)", "Basic cross product works");
 
 for flat ($v1, $v2, $v3) X ($v1, $v2, $v3) -> $x, $y
 {
@@ -209,7 +209,7 @@ dies-ok( { $v1.Num; }, "Make sure .Num does not work on 3D Math::Vector");
 # 
 # my Math::VectorWithLength $vl = Math::VectorWithLength.new($v7.coordinates);
 # isa-ok($vl, Math::VectorWithLength, "Variable is of type Math::VectorWithLength");
-# my $vlc = EVAL($vl.perl);
-# isa-ok($vlc, Math::VectorWithLength, "EVAL'd perl'd variable is of type Math::VectorWithLength");
+# my $vlc = EVAL($vl.raku);
+# isa-ok($vlc, Math::VectorWithLength, "EVAL'd raku'd variable is of type Math::VectorWithLength");
 
 done-testing;

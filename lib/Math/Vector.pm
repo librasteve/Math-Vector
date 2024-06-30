@@ -19,10 +19,10 @@ class Math::Vector does Positional
     
     multi method Str() 
     {
-        "(" ~ @.coordinates.join(', ') ~ ")";
+        "^(" ~ @.coordinates.join(', ') ~ ")";
     }
     
-    multi method perl()
+    multi method raku()
     {
         "Math::Vector.new(" ~ @.coordinates.map({.perl}).join(', ') ~ ")";        
     }
@@ -82,6 +82,10 @@ class Math::Vector does Positional
         {
             return Math::Vector.new(@.coordinates);
         }
+    }
+
+    method round($r) {
+        Math::Vector.new(@.coordinates>>.round($r));
     }
     
     multi sub infix:<+> (Math::Vector $a, Math::Vector $b where { $a.dim == $b.dim }) is export
