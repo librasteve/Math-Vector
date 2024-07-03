@@ -1,5 +1,4 @@
 use v6;
-no precompilation; # avoid https://github.com/rakudo/rakudo/issues/1219
 
 use Test;  # so we can define is-approx-vector
 
