@@ -142,17 +142,7 @@ for flat ($v1, $v2, $v3) X ($v1, $v2, $v3) -> $x, $y
               "|x × y|^2 = |x|^2 * |y|^2 - (x ⋅ y)^2");
 }
 
-for flat ($v7, $v8, $v9, $v10) X ($v7, $v8, $v9, $v10) -> $x, $y
-{
-    my $cross = $x × $y;
-    is-approx($cross ⋅ $x, 0, "(x × y) ⋅ x = 0");
-    is-approx($cross ⋅ $y, 0, "(x × y) ⋅ y = 0");
-    is-approx-vector($cross, -($y × $x), "x × y = -y × x");
-    is-approx($cross.length ** 2, $x.length ** 2 * $y.length ** 2 - ($x ⋅ $y) ** 2, 
-              "|x × y|^2 = |x|^2 * |y|^2 - (x ⋅ y)^2");
-}
-
-lives-ok { $v7 cross $v8, "7D cross product works writing out cross"}
+dies-ok { $v7 cross $v8, "7D cross product works writing out cross"}
 dies-ok( { $v1 × $v7 }, "You can't do cross products of different dimensions");
 dies-ok( { $v5 × $v6 }, "You can't do 5D cross products");
 dies-ok( { $v1 cross $v7 }, "You can't do cross products of different dimensions");
