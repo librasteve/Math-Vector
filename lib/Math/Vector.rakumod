@@ -29,22 +29,18 @@ class Math::Vector does Positional
         die "Cannot call Num on Vector!";
     }
 
-    method dim() {
+    method dim()
+    {
         @.components.elems;
     }
 
-    multi infix:<⋅>(Math::Vector $a, Math::Vector $b where { $a.dim == $b.dim }) is export # is tighter(&infix:<+>) (NYI)
+    method dot($other)
     {
-        [+]($a.components »*« $b.components);
-    }
-
-    multi infix:<dot>(Math::Vector $a, Math::Vector $b) is export
-    {
-        $a ⋅ $b;
+        [+](self.components »*« $other.components);
     }
 
     method length() {
-        sqrt(self ⋅ self.conj);
+        sqrt(self.dot: self.conj);
     }
 
     method abs()
@@ -119,6 +115,17 @@ class Math::Vector does Positional
     {
         $a.length;
     }
+}
+
+
+multi infix:<⋅>(Math::Vector $a, Math::Vector $b where { $a.dim == $b.dim }) is export
+{
+    $a.dot: $b
+}
+
+multi infix:<dot>(Math::Vector $a, Math::Vector $b where { $a.dim == $b.dim }) is export
+{
+    $a.dot: $b
 }
 
 subset Math::UnitVector of Math::Vector where { (1 - 1e-10) < $^v.length < (1 + 1e-10) };
