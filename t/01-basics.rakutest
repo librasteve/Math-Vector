@@ -176,30 +176,4 @@ dies-ok( { $v5 cross $v6 }, "You can't do 5D cross products");
 # isa-ok(+$v1, Math::Vector, "Prefix + works on the Math::Vector class");
 dies-ok( { $v1.Num; }, "Make sure .Num does not work on 3D Math::Vector");
 
-# test extensions
-# class Math::VectorWithLength is Math::Vector
-# {
-#     has $.length;
-#     
-#     multi method new (*@x) 
-#     {
-#         self.bless(*, components => @x, length => sqrt [+] (@x »*« @x));
-#     }
-#     
-#     multi method new (@x) 
-#     {
-#         self.bless(*, components => @x, length => sqrt [+] (@x »*« @x));
-#     }
-#     
-#     submethod Length
-#     {
-#         $.length;
-#     }
-# }
-# 
-# my Math::VectorWithLength $vl = Math::VectorWithLength.new($v7.components);
-# isa-ok($vl, Math::VectorWithLength, "Variable is of type Math::VectorWithLength");
-# my $vlc = EVAL($vl.raku);
-# isa-ok($vlc, Math::VectorWithLength, "EVAL'd raku'd variable is of type Math::VectorWithLength");
-
 done-testing;
