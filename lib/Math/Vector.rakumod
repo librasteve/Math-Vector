@@ -4,27 +4,27 @@ class Math::Vector does Positional
 {
     has @.components handles <AT-POS>;
     
-    multi method new (*@x) 
+    multi method new (*@x)
     {
         self.bless(components => @x);
     }
     
-    multi method new (@x) 
+    multi method new (@x)
     {
         self.bless(components => @x);
     }
     
-    multi method Str() 
+    method Str()
     {
         "^(" ~ @.components.join(', ') ~ ")";
     }
     
-    multi method raku()
+    method raku()
     {
         "Math::Vector.new(" ~ @.components.map({.perl}).join(', ') ~ ")";
     }
     
-    multi method Num()
+    method Num()
     {
         die "Cannot call Num on Vector!";
     }

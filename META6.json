@@ -1,7 +1,7 @@
 {
   "name": "Math::Vector",
   "description": "Vector math class",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "perl": "6.d",
   "authors": [
     "librasteve"
