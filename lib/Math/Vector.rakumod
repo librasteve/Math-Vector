@@ -1,29 +1,29 @@
-use v6;
+use v6.d;
 
-use Test;  # so we can define is-approx-vector
+use Test;
 
 class Math::Vector does Positional
 {
-    has @.coordinates handles <AT-POS>;
+    has @.components handles <AT-POS>;
     
     multi method new (*@x) 
     {
-        self.bless(coordinates => @x);
+        self.bless(components => @x);
     }
     
     multi method new (@x) 
     {
-        self.bless(coordinates => @x);
+        self.bless(components => @x);
     }
     
     multi method Str() 
     {
-        "^(" ~ @.coordinates.join(', ') ~ ")";
+        "^(" ~ @.components.join(', ') ~ ")";
     }
     
     multi method raku()
     {
-        "Math::Vector.new(" ~ @.coordinates.map({.perl}).join(', ') ~ ")";        
+        "Math::Vector.new(" ~ @.components.map({.perl}).join(', ') ~ ")";
     }
     
     multi method Num()
@@ -36,12 +36,12 @@ class Math::Vector does Positional
     }
 
     method dim() {
-        @.coordinates.elems;
+        @.components.elems;
     }
 
     multi sub infix:<⋅>(Math::Vector $a, Math::Vector $b where { $a.dim == $b.dim }) is export # is tighter(&infix:<+>) (NYI)
     {
-        [+]($a.coordinates »*« $b.coordinates);
+        [+]($a.components »*« $b.components);
     }
 
     multi sub infix:<dot>(Math::Vector $a, Math::Vector $b) is export
@@ -64,7 +64,7 @@ class Math::Vector does Positional
 
     multi method conj()
     {
-        Math::Vector.new(@.coordinates>>.conj);
+        Math::Vector.new(@.components>>.conj);
     }
         
     method Unitize() is DEPRECATED('unitize') {
@@ -75,46 +75,46 @@ class Math::Vector does Positional
         my $length = self.length;
         if $length > 1e-10
         {
-            return Math::Vector.new(@.coordinates >>/>> $length);
+            return Math::Vector.new(@.components >>/>> $length);
         }
         else
         {
-            return Math::Vector.new(@.coordinates);
+            return Math::Vector.new(@.components);
         }
     }
 
     method round($r) {
-        Math::Vector.new(@.coordinates>>.round($r));
+        Math::Vector.new(@.components>>.round($r));
     }
     
     multi sub infix:<+> (Math::Vector $a, Math::Vector $b where { $a.dim == $b.dim }) is export
     {
-        Math::Vector.new($a.coordinates »+« $b.coordinates);
+        Math::Vector.new($a.components »+« $b.components);
     }
     
     multi sub infix:<->(Math::Vector $a, Math::Vector $b where { $a.dim == $b.dim }) is export
     {
-        Math::Vector.new($a.coordinates »-« $b.coordinates);
+        Math::Vector.new($a.components »-« $b.components);
     }
 
     multi sub prefix:<->(Math::Vector $a) is export
     {
-        Math::Vector.new(0 <<-<< $a.coordinates);
+        Math::Vector.new(0 <<-<< $a.components);
     }
 
     multi sub infix:<*>(Math::Vector $a, $b) is export
     {
-        Math::Vector.new($a.coordinates >>*>> $b);
+        Math::Vector.new($a.components >>*>> $b);
     }
 
     multi sub infix:<*>($a, Math::Vector $b) is export
     {
-        Math::Vector.new($a <<*<< $b.coordinates);
+        Math::Vector.new($a <<*<< $b.components);
     }
 
     multi sub infix:</>(Math::Vector $a, $b) is export
     {
-        Math::Vector.new($a.coordinates >>/>> $b);
+        Math::Vector.new($a.components >>/>> $b);
     }
 
     multi sub infix:<×>(Math::Vector $a where { $a.dim == 3 }, Math::Vector $b where { $b.dim == 3 }) is export

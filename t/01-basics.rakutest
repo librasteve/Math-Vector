@@ -193,12 +193,12 @@ dies-ok( { $v1.Num; }, "Make sure .Num does not work on 3D Math::Vector");
 #     
 #     multi method new (*@x) 
 #     {
-#         self.bless(*, coordinates => @x, length => sqrt [+] (@x »*« @x));
+#         self.bless(*, components => @x, length => sqrt [+] (@x »*« @x));
 #     }
 #     
 #     multi method new (@x) 
 #     {
-#         self.bless(*, coordinates => @x, length => sqrt [+] (@x »*« @x));
+#         self.bless(*, components => @x, length => sqrt [+] (@x »*« @x));
 #     }
 #     
 #     submethod Length
@@ -207,7 +207,7 @@ dies-ok( { $v1.Num; }, "Make sure .Num does not work on 3D Math::Vector");
 #     }
 # }
 # 
-# my Math::VectorWithLength $vl = Math::VectorWithLength.new($v7.coordinates);
+# my Math::VectorWithLength $vl = Math::VectorWithLength.new($v7.components);
 # isa-ok($vl, Math::VectorWithLength, "Variable is of type Math::VectorWithLength");
 # my $vlc = EVAL($vl.raku);
 # isa-ok($vlc, Math::VectorWithLength, "EVAL'd raku'd variable is of type Math::VectorWithLength");
