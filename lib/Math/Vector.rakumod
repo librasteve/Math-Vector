@@ -30,10 +30,6 @@ class Math::Vector does Positional
     {
         die "Cannot call Num on Vector!";
     }
-    
-    method Dim() is DEPRECATED('dim') {
-        self.dim;
-    }
 
     method dim() {
         @.components.elems;
@@ -49,10 +45,6 @@ class Math::Vector does Positional
         $a ⋅ $b;
     }
 
-    method Length() is DEPRECATED('length') {
-        self.length;
-    }
-
     method length() {
         sqrt(self ⋅ self.conj);
     }
@@ -65,10 +57,6 @@ class Math::Vector does Positional
     multi method conj()
     {
         Math::Vector.new(@.components>>.conj);
-    }
-        
-    method Unitize() is DEPRECATED('unitize') {
-        self.unitize;
     }
 
     method unitize() {
