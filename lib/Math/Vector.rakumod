@@ -104,14 +104,13 @@ class Math::Vector does Positional
 
     method cmp($other)
     {
-#        my $tol = 0.00001;
         my $tol := $*TOLERANCE;
 
         given self.length - $other.length
         {
-            when         * > $tol { Less }
+            when         * > $tol { More }
             when -$tol < * < $tol { Same }
-            when -$tol > *        { More }
+            when -$tol > *        { Less }
         }
 
     }
