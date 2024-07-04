@@ -84,7 +84,8 @@ class Math::Vector does Positional
         Math::Vector.new(@.components>>.conj);
     }
 
-    method unitize() {
+    method unitize()
+    {
         my $length = self.length;
         if $length > 1e-10
         {
@@ -96,8 +97,23 @@ class Math::Vector does Positional
         }
     }
 
-    method round($r) {
+    method round($r)
+    {
         Math::Vector.new(@.components>>.round($r));
+    }
+
+    method cmp($other)
+    {
+#        my $tol = 0.00001;
+        my $tol := $*TOLERANCE;
+
+        given self.length - $other.length
+        {
+            when         * > $tol { Less }
+            when -$tol < * < $tol { Same }
+            when -$tol > *        { More }
+        }
+
     }
 }
 
@@ -158,5 +174,10 @@ multi infix:<cross>(Math::Vector $a where { $a.dim == 3 }, Math::Vector $b where
 multi circumfix:<⎡ ⎤>(Math::Vector $a) is export
 {
     $a.length;
+}
+
+multi infix:<cmp>(Math::Vector $a, Math::Vector $b where { $a.dim == $b.dim }) is export
+{
+    $a.cmp: $b;
 }
 
