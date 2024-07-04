@@ -1,11 +1,10 @@
 [![License: Artistic-2.0](https://img.shields.io/badge/License-Artistic%202.0-0298c3.svg)](https://opensource.org/licenses/Artistic-2.0)
 
-
-#Math::Vector
+# Math::Vector
 
 This is a fork of https://github.com/colomon/Math-Vector from v0.6.0
 
-# SYNOPSIS
+## SYNOPSIS
 
 ```raku
 #!/usr/bin/env raku
