@@ -35,12 +35,12 @@ class Math::Vector does Positional
         @.components.elems;
     }
 
-    multi sub infix:<⋅>(Math::Vector $a, Math::Vector $b where { $a.dim == $b.dim }) is export # is tighter(&infix:<+>) (NYI)
+    multi infix:<⋅>(Math::Vector $a, Math::Vector $b where { $a.dim == $b.dim }) is export # is tighter(&infix:<+>) (NYI)
     {
         [+]($a.components »*« $b.components);
     }
 
-    multi sub infix:<dot>(Math::Vector $a, Math::Vector $b) is export
+    multi infix:<dot>(Math::Vector $a, Math::Vector $b) is export
     {
         $a ⋅ $b;
     }
@@ -75,49 +75,49 @@ class Math::Vector does Positional
         Math::Vector.new(@.components>>.round($r));
     }
     
-    multi sub infix:<+> (Math::Vector $a, Math::Vector $b where { $a.dim == $b.dim }) is export
+    multi infix:<+> (Math::Vector $a, Math::Vector $b where { $a.dim == $b.dim }) is export
     {
         Math::Vector.new($a.components »+« $b.components);
     }
     
-    multi sub infix:<->(Math::Vector $a, Math::Vector $b where { $a.dim == $b.dim }) is export
+    multi infix:<->(Math::Vector $a, Math::Vector $b where { $a.dim == $b.dim }) is export
     {
         Math::Vector.new($a.components »-« $b.components);
     }
 
-    multi sub prefix:<->(Math::Vector $a) is export
+    multi prefix:<->(Math::Vector $a) is export
     {
         Math::Vector.new(0 <<-<< $a.components);
     }
 
-    multi sub infix:<*>(Math::Vector $a, $b) is export
+    multi infix:<*>(Math::Vector $a, $b) is export
     {
         Math::Vector.new($a.components >>*>> $b);
     }
 
-    multi sub infix:<*>($a, Math::Vector $b) is export
+    multi infix:<*>($a, Math::Vector $b) is export
     {
         Math::Vector.new($a <<*<< $b.components);
     }
 
-    multi sub infix:</>(Math::Vector $a, $b) is export
+    multi infix:</>(Math::Vector $a, $b) is export
     {
         Math::Vector.new($a.components >>/>> $b);
     }
 
-    multi sub infix:<×>(Math::Vector $a where { $a.dim == 3 }, Math::Vector $b where { $b.dim == 3 }) is export
+    multi infix:<×>(Math::Vector $a where { $a.dim == 3 }, Math::Vector $b where { $b.dim == 3 }) is export
     {
         Math::Vector.new($a[1] * $b[2] - $a[2] * $b[1],
             $a[2] * $b[0] - $a[0] * $b[2],
             $a[0] * $b[1] - $a[1] * $b[0]);
     }
 
-    multi sub infix:<cross>(Math::Vector $a, Math::Vector $b) is export
+    multi infix:<cross>(Math::Vector $a, Math::Vector $b) is export
     {
         $a × $b;
     }
 
-    multi sub circumfix:<⎡ ⎤>(Math::Vector $a) is export
+    multi circumfix:<⎡ ⎤>(Math::Vector $a) is export
     {
         $a.length;
     }
