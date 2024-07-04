@@ -79,11 +79,6 @@ class Math::Vector does Positional
         );
     }
 
-    method conj()
-    {
-        Math::Vector.new(@.components>>.conj);
-    }
-
     method unitize()
     {
         my $length = self.length;
@@ -95,6 +90,11 @@ class Math::Vector does Positional
         {
             return Math::Vector.new(@.components);
         }
+    }
+
+    method conj()
+    {
+        Math::Vector.new(@.components>>.conj);
     }
 
     method round($r)

@@ -1,7 +1,7 @@
 {
   "name": "Math::Vector",
   "description": "Vector math class",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "perl": "6.d",
   "authors": [
     "librasteve"
@@ -13,8 +13,9 @@
   },
   "license": "Artistic-2.0",
   "tags": [
-    "Math"
+    "Math",
+    "Vector"
   ],
-  "source-url": "git://github.com/colomon/Math-Vector.git",
+  "source-url": "git://github.com/librasteve/Math-Vector.git",
   "source-type": "git"
 }
