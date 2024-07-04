@@ -1,7 +1,5 @@
 use v6.d;
 
-use Test;
-
 class Math::Vector does Positional
 {
     has @.components handles <AT-POS>;
@@ -48,13 +46,13 @@ class Math::Vector does Positional
     method length() {
         sqrt(self ⋅ self.conj);
     }
-    
-    multi method abs()
+
+    method abs()
     {
         self.length;
     }
 
-    multi method conj()
+    method conj()
     {
         Math::Vector.new(@.components>>.conj);
     }
@@ -74,12 +72,12 @@ class Math::Vector does Positional
     method round($r) {
         Math::Vector.new(@.components>>.round($r));
     }
-    
+
     multi infix:<+> (Math::Vector $a, Math::Vector $b where { $a.dim == $b.dim }) is export
     {
         Math::Vector.new($a.components »+« $b.components);
     }
-    
+
     multi infix:<->(Math::Vector $a, Math::Vector $b where { $a.dim == $b.dim }) is export
     {
         Math::Vector.new($a.components »-« $b.components);
@@ -120,11 +118,6 @@ class Math::Vector does Positional
     multi circumfix:<⎡ ⎤>(Math::Vector $a) is export
     {
         $a.length;
-    }
-
-    sub is-approx-vector(Math::Vector $a, Math::Vector $b, $desc) is export
-    {
-        ok(($a - $b).length < 0.00001, $desc);
     }
 }
 

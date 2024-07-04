@@ -2,6 +2,12 @@ use v6;
 use Math::Vector;
 use Test;
 
+
+sub is-approx-vector(Math::Vector $a, Math::Vector $b, $desc)
+{
+    ok(($a - $b).length < 0.00001, $desc);
+}
+
 my $v1 = Math::Vector.new(1, 2, 3);
 my Math::Vector $v2 = Math::Vector.new(3, 4, 0);
 my @v3 = (-1, 0, 2);
